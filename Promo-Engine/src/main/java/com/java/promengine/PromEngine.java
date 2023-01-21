@@ -25,10 +25,10 @@ public class PromEngine {
 	private boolean skuIdCEqualToD = false;
 
 	// Private Static variable
-	private static char skuIdA = 'A';
-	private static char skuIdB = 'B';
-	private static char skuIdC = 'C';
-	private static char skuIdD = 'D';
+	private static char SKUIDA = 'A';
+	private static char SKUIDB = 'B';
+	private static char SKUIDC = 'C';
+	private static char SKUIDD = 'D';
 
 	/**
 	 * SKU ids (A, B, C. ..) over which the promotion engine will need to run.
@@ -40,26 +40,26 @@ public class PromEngine {
 
 		for (int i = 0; i < skuIds.length; i++) {
 			char skuIdsChar = skuIds[i];
-			if (skuIdsChar == skuIdA) {
+			if (skuIdsChar == SKUIDA) {
 				skuIdAcount++;
 			}
-			if (skuIdsChar == skuIdB) {
+			if (skuIdsChar == SKUIDB) {
 				skuIdBcount++;
 			}
-			if (skuIdsChar == skuIdC) {
+			if (skuIdsChar == SKUIDC) {
 				skuIdCcount++;
 			}
-			if (skuIdsChar == skuIdD) {
+			if (skuIdsChar == SKUIDD) {
 				skuIdDcount++;
 			}
 		}
 
 		// Calculating A price - buy 'A' items of a SKU for a fixed price (3 A's for
 		// 130)
-		getTotalPriceForUnitA(skuIdAcount);
+		calculateTotalPriceForUnitA(skuIdAcount);
 
 		// Calculating B price - buy 'B' items of a SKU for a fixed price (2 B's for 45)
-		getTotalPriceForUnitB(skuIdBcount);
+		calculateTotalPriceForUnitB(skuIdBcount);
 
 		// find c and d count
 		if (skuIdCcount > skuIdDcount) {
@@ -73,21 +73,21 @@ public class PromEngine {
 		}
 
 		// Buy SKU 1 & SKU 2 for a fixed price ( C + D = 30 ) if C count greater then D
-		getTotalUnitPriceIfskuIdCGreaterThenD(skuIdCGreaterThenD, skuIdDcount);
+		calculateTotalUnitPriceIfskuIdCGreaterThenD(skuIdCGreaterThenD, skuIdDcount);
 
 		// Buy SKU 1 & SKU 2 for a fixed price ( C + D = 30 ) if D count greater then C
-		getTotalUnitPriceIfskuIdDGreaterThenC(skuIdDGreaterThenC, skuIdCcount);
+		calculateTotalUnitPriceIfskuIdDGreaterThenC(skuIdDGreaterThenC, skuIdCcount);
 
 		// Buy SKU 1 & SKU 2 for a fixed price ( C + D = 30 ) if C equal to D
-		getTotalUnitPriceIfskuIdCEqualToD(skuIdCEqualToD);
+		calculateTotalUnitPriceIfskuIdCEqualToD(skuIdCEqualToD);
 
 		// Buy SKU 1 & SKU 2 for a fixed price ( C + D = 30 ) if D count greater then C
 		// and C count is ZERO
-		getTotalUnitPriceIfskuIdCGreaterThenDAndskuIdDcount(skuIdCGreaterThenD, skuIdDcount);
+		calculateTotalUnitPriceIfskuIdCGreaterThenDAndskuIdDcount(skuIdCGreaterThenD, skuIdDcount);
 
 		// Buy SKU 1 & SKU 2 for a fixed price ( C + D = 30 ) if C count greater then D
 		// and D count is ZERO
-		getTotalUnitPriceIfskuIdDGreaterThenCAndskuIdCcount(skuIdDGreaterThenC, skuIdCcount);
+		calculateTotalUnitPriceIfskuIdDGreaterThenCAndskuIdCcount(skuIdDGreaterThenC, skuIdCcount);
 
 		return totalPriceskuIdCandD + totalPriceskuIdA + totalPriceskuIdB;
 	}
@@ -97,7 +97,7 @@ public class PromEngine {
 	 * 
 	 * @param skuIdAcount
 	 */
-	private void getTotalPriceForUnitA(int skuIdAcount) {
+	private void calculateTotalPriceForUnitA(int skuIdAcount) {
 
 		int activePromotionsACount = skuIdAcount / 3;
 		int totalActivePromotionsAPrice = activePromotionsACount * 130;
@@ -112,7 +112,7 @@ public class PromEngine {
 	 * 
 	 * @param skuIdBcount
 	 */
-	private void getTotalPriceForUnitB(int skuIdBcount) {
+	private void calculateTotalPriceForUnitB(int skuIdBcount) {
 
 		int activePromotionsBCount = skuIdBcount / 2;
 		int totalActivePromotionsBPrice = activePromotionsBCount * 45;
@@ -127,7 +127,7 @@ public class PromEngine {
 	 * @param skuIdCGreaterThenD
 	 * @param skuIdDcount
 	 */
-	private void getTotalUnitPriceIfskuIdCGreaterThenD(boolean skuIdCGreaterThenD, int skuIdDcount) {
+	private void calculateTotalUnitPriceIfskuIdCGreaterThenD(boolean skuIdCGreaterThenD, int skuIdDcount) {
 
 		if (skuIdCGreaterThenD && skuIdDcount > 0) {
 			for (int i = 0; i < skuIdCcount; i++) {
@@ -149,7 +149,7 @@ public class PromEngine {
 	 * @param skuIdDGreaterThenC
 	 * @param skuIdCcount
 	 */
-	private void getTotalUnitPriceIfskuIdDGreaterThenC(boolean skuIdDGreaterThenC, int skuIdCcount) {
+	private void calculateTotalUnitPriceIfskuIdDGreaterThenC(boolean skuIdDGreaterThenC, int skuIdCcount) {
 
 		if (skuIdDGreaterThenC && skuIdCcount > 0) {
 			for (int i = 0; i < skuIdDcount; i++) {
@@ -170,7 +170,7 @@ public class PromEngine {
 	 * 
 	 * @param skuIdCEqualToD
 	 */
-	private void getTotalUnitPriceIfskuIdCEqualToD(boolean skuIdCEqualToD) {
+	private void calculateTotalUnitPriceIfskuIdCEqualToD(boolean skuIdCEqualToD) {
 		if (skuIdCEqualToD) {
 			for (int i = 0; i < skuIdCcount; i++) {
 				skuIdCAndDactivePromotionsPrice = +30;
@@ -188,7 +188,7 @@ public class PromEngine {
 	 * @param skuIdCGreaterThenD
 	 * @param skuIdDcount
 	 */
-	private void getTotalUnitPriceIfskuIdCGreaterThenDAndskuIdDcount(boolean skuIdCGreaterThenD, int skuIdDcount) {
+	private void calculateTotalUnitPriceIfskuIdCGreaterThenDAndskuIdDcount(boolean skuIdCGreaterThenD, int skuIdDcount) {
 
 		if (skuIdCGreaterThenD && skuIdDcount == 0) {
 			totaUnitSkuIdCPrice = skuIdCcount * 20;
@@ -204,7 +204,7 @@ public class PromEngine {
 	 * @param skuIdDGreaterThenC
 	 * @param skuIdCcount
 	 */
-	private void getTotalUnitPriceIfskuIdDGreaterThenCAndskuIdCcount(boolean skuIdDGreaterThenC, int skuIdCcount) {
+	private void calculateTotalUnitPriceIfskuIdDGreaterThenCAndskuIdCcount(boolean skuIdDGreaterThenC, int skuIdCcount) {
 
 		if (skuIdDGreaterThenC && skuIdCcount == 0) {
 			totaUnitSkuIdCPrice = skuIdCcount * 20;

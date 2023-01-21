@@ -20,7 +20,6 @@ public class PromEngineTest {
 		PromEngine engine = new PromEngine();
 		char[] skuIds = { 'A', 'B', 'C' };
 		int result = engine.getCartCheckoutAmount(skuIds);
-		System.out.println(result);
 		assertEquals(result, 100);
 
 	}
@@ -33,7 +32,6 @@ public class PromEngineTest {
 		PromEngine engine = new PromEngine();
 		char[] skuIds = { 'A', 'A', 'A', 'A', 'A', 'B', 'B', 'B', 'B', 'B', 'C' };
 		int result = engine.getCartCheckoutAmount(skuIds);
-		System.out.println(result);
 		assertEquals(result, 370);
 
 	}
@@ -46,7 +44,6 @@ public class PromEngineTest {
 		PromEngine engine = new PromEngine();
 		char[] skuIds = { 'A', 'A', 'A', 'B', 'B', 'B', 'B', 'B', 'C', 'D' };
 		int result = engine.getCartCheckoutAmount(skuIds);
-		System.out.println(result);
 		assertEquals(result, 280);
 
 	}
